@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart'
     show StatelessWidget, BuildContext, Widget, Text, AppBar, Scaffold, ElevatedButton, CircularProgressIndicator, ListTile;
 import 'package:hotreload/features/client_http/presentation/providers/posts_provider.dart';
+import 'package:hotreload/features/client_http/presentation/widgets/card_post.dart';
 import 'package:provider/provider.dart';
 
 class PostsScreen extends StatelessWidget {
@@ -27,10 +28,7 @@ class PostsScreen extends StatelessWidget {
                     itemCount: provider.posts.length,
                     itemBuilder: (_, index) {
                       final post = provider.posts[index];
-                      return ListTile(
-                        title: Text(post.title),
-                        subtitle: Text(post.body),
-                      );
+                      return CardPost(posts: post);
                     },
                   ),
           ),

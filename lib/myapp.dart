@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           providers: [
           ChangeNotifierProvider(
             create: (_) => PostsProvider(getPostsUseCase: getPostsUseCase)),
-        ],
+          ],
           child: MaterialApp(
             home: PostsScreen(),
           )
