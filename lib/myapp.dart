@@ -6,11 +6,13 @@ import 'package:hotreload/features/client_http/presentation/pages/posts_screen.d
 import 'package:hotreload/features/client_http/presentation/providers/posts_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'features/client_http/domain/usecase/create_post.dart';
 import 'features/client_http/domain/usecase/get_posts.dart';
 
 class MyApp extends StatelessWidget {
   final GetPosts getPostsUseCase;
-  const MyApp({super.key, required this.getPostsUseCase});
+  final CreatePost createPostUseCase;
+  const MyApp({super.key, required this.getPostsUseCase, required this.createPostUseCase});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,11 @@ class MyApp extends StatelessWidget {
         MultiProvider(
           providers: [
           ChangeNotifierProvider(
-            create: (_) => PostsProvider(getPostsUseCase: getPostsUseCase)),
+            create: (_) => PostsProvider(
+                getPostsUseCase: getPostsUseCase, createPostUseCase: createPostUseCase)),
           ],
           child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             home: PostsScreen(),
           )
     ));

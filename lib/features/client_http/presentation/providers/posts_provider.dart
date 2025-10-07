@@ -1,12 +1,18 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../domain/entities/posts.dart';
+import '../../domain/usecase/create_post.dart';
 import '../../domain/usecase/get_posts.dart';
 
 class PostsProvider with ChangeNotifier {
   final GetPosts getPostsUseCase;
+  final CreatePost createPostUseCase;
 
-  PostsProvider({required this.getPostsUseCase});
+  PostsProvider({
+    required this.getPostsUseCase,
+    required this.createPostUseCase
+  });
+
   List<Posts> _posts = [];
   bool _isLoading = false;
   String? _error;
@@ -28,5 +34,12 @@ class PostsProvider with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
+  }
+
+  Future<void> addPost(String title, String body) async {
+    final newPost = Posts(id: 0, title: title, body: body);
+    final created = await createPostUseCase(newPost);
+    _posts.insert(0, created);
+    notifyListeners();
   }
 }
