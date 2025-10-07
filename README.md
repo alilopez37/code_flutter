@@ -4,7 +4,7 @@ Este repositorio contiene diversas ramas de apoyo para el aprendizaje de flutter
 
 ## Dependencias
 
-```js
+```flutter
 dependencies:
   flutter:
     sdk: flutter
@@ -18,4 +18,10 @@ dependencies:
 flutter:
   assets:
     - .env
+```
+## .env
+
+```flutter
+API_URL=<url>
+ENVIRONMENT=development
 ```
