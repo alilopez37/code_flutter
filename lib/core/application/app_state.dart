@@ -8,19 +8,12 @@ class AppState extends ChangeNotifier {
 
   AuthStatus get authStatus => _authStatus;
 
-  Future<void> checkAuthStatus() async {
-    await Future.delayed(const Duration(seconds: 5));
-    _authStatus = AuthStatus.unauthenticated;
-    notifyListeners();
-  }
-
-
-  void login() {
+  void setAuthenticated() {
     _authStatus = AuthStatus.authenticated;
     notifyListeners();
   }
 
-  void logout() {
+  void setUnauthenticated() {
     _authStatus = AuthStatus.unauthenticated;
     notifyListeners();
   }

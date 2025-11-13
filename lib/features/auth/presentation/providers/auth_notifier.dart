@@ -16,10 +16,10 @@ class AuthNotifier extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners();
-    _appState.login();
+    _appState.setAuthenticated();
   }
 
   void logout() {
-    _appState.logout();
+    _appState.setUnauthenticated();
   }
 }

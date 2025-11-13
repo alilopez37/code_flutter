@@ -52,24 +52,37 @@ class AppRouter {
       )
     ],
       redirect: (context, state) {
-        //final appState = Provider.of<AppState>(context, listen: false);
         final authStatus = appState.authStatus;
         final loc = state.matchedLocation;
 
-        print(authStatus);
-
         switch (authStatus) {
           case AuthStatus.unknown:
-          // Solo redirige si no estamos ya en Splash
             return loc == AppRoutes.splashPath ? null : AppRoutes.splashPath;
 
           case AuthStatus.unauthenticated:
-          // Bloquear rutas protegidas si no está autenticado
-            if (loc == AppRoutes.homePath || loc == AppRoutes.profilePath) {
+            const publicRoutes = [
+              AppRoutes.loginPath,
+              AppRoutes.registerPath,
+              AppRoutes.splashPath,
+              //AppRoutes.forgotPasswordPath,
+            ];
+
+            const privateRoutes = [
+              AppRoutes.homePath,
+              AppRoutes.profilePath,
+              //AppRoutes.settingsPath,
+              //AppRoutes.dashboardPath,
+            ];
+
+            if (privateRoutes.contains(loc)) {
               return AppRoutes.loginPath;
             }
 
-            return loc == AppRoutes.loginPath ? null : AppRoutes.loginPath;
+            if (publicRoutes.contains(loc)) {
+              return null;
+            }
+
+            return AppRoutes.loginPath;
 
           case AuthStatus.authenticated:
             return loc == AppRoutes.loginPath ? AppRoutes.homePath : null;

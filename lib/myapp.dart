@@ -5,6 +5,7 @@ import 'package:hotreload/core/router/app_router.dart';
 import 'package:provider/provider.dart';
 
 import 'core/application/app_state.dart';
+import 'core/application/deep_link_service.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context, listen: false);
-    appState.checkAuthStatus();
+    final deepLinkService = DeepLinkService();
+    deepLinkService.initDeepLinks(context);
 
     final appRouter = AppRouter(appState: appState);
     return MaterialApp.router(

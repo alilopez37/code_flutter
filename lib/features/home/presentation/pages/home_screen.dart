@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
                 onPressed: (){
-                  context.goNamed(AppRoutes.register);
+                  context.goNamed(AppRoutes.profile, pathParameters: {'id': '123'});
                 },
                 child: Text("Registro"))
           ],
